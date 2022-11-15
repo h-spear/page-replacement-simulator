@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static etc.Color.*;
+import static etc.Font.*;
 
 public class IO {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -48,6 +48,20 @@ public class IO {
         String result = "";
         result += " ".repeat(leftTrimCount);
         result += string;
+        result += " ".repeat(rightTrimCount);
+        return result;
+    }
+
+    public static String centerAlignAndEffect(String string, int length, String effect) {
+        int trimCount = length - string.length();
+        int rightTrimCount = trimCount / 2;
+        int leftTrimCount = trimCount - rightTrimCount;
+
+        String result = "";
+        result += " ".repeat(leftTrimCount);
+        result += effect;
+        result += string;
+        result += RESET;
         result += " ".repeat(rightTrimCount);
         return result;
     }

@@ -1,10 +1,9 @@
 package policy;
 
 import static etc.IO.*;
-import static etc.Color.*;
+import static etc.Font.*;
 
 import java.io.*;
-import java.util.List;
 
 abstract class ReplacementSimulator implements Simulator {
     protected String name = "Simulator";
@@ -34,21 +33,7 @@ abstract class ReplacementSimulator implements Simulator {
 
     @Override
     public void simulate(Long[] stream) {
-        System.out.println();
-        System.out.printf("%s animation. (", name);
-        printf(FONT_BLUE, "blue : hit, ");
-        printf(FONT_RED, "red : page fault");
-        System.out.println(")");
-        System.out.printf("|");
-        printf(FONT_GREEN, " time ");
-        System.out.printf("|");
-        printf(FONT_PURPLE, "  data  ");
-        System.out.printf("|");
-        for (int i = 1; i <= bufferSize; i++) {
-            System.out.printf(centerAlign("page"+i, 8));
-            System.out.printf("|");
-        }
-        System.out.println();
+        printTitle();
         Integer t = 0;
         for (Long data: stream) {
             ++t;
@@ -77,7 +62,25 @@ abstract class ReplacementSimulator implements Simulator {
             buffer[i] = -1L;    // 데이터가 없으면 -1
     }
 
-    private void showBuffer() {
+    protected void printTitle() {
+        System.out.println();
+        System.out.printf("%s animation. (", name);
+        printf(FONT_BLUE, "blue : hit, ");
+        printf(FONT_RED, "red : page fault");
+        System.out.println(")");
+        System.out.printf("|");
+        printf(FONT_GREEN, " time ");
+        System.out.printf("|");
+        printf(FONT_PURPLE, " stream ");
+        System.out.printf("|");
+        for (int i = 1; i <= bufferSize; i++) {
+            System.out.printf(centerAlign("page"+i, 8));
+            System.out.printf("|");
+        }
+        System.out.println();
+    }
+
+    protected void showBuffer() {
         for (int i = 0; i < bufferSize; i++) {
             Long data = buffer[i];
             if (data == -1L) {

@@ -3,7 +3,7 @@ package main;
 import enums.Mode;
 import etc.FileChooser;
 import static etc.IO.*;
-import static etc.Color.*;
+import static etc.Font.*;
 
 import policy.*;
 import enums.Policy;
@@ -120,15 +120,9 @@ public class Program {
                     continue;
                 }
                 int i = Integer.parseInt(string);
-
-                if (i == Policy.FIFO.ordinal())
-                    simulators.add(new FIFOSimulator(bufferSize));
-                if (i == Policy.LRU.ordinal())
-                    simulators.add(new LRUSimulator(bufferSize));
-                if (i == Policy.LFU.ordinal())
-                    simulators.add(new LFUSimulator(bufferSize));
-                if (i == Policy.MFU.ordinal())
-                    simulators.add(new MFUSimulator(bufferSize));
+                Simulator simulator = Policy.getSimulator(i, bufferSize);
+                if (simulator != null)
+                    simulators.add(simulator);
             }
 
             if (simulators.isEmpty()) {
