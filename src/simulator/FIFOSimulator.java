@@ -1,4 +1,4 @@
-package policy;
+package simulator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

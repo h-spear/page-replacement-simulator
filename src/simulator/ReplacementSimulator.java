@@ -1,4 +1,4 @@
-package policy;
+package simulator;
 
 import static etc.IO.*;
 import static etc.Font.*;

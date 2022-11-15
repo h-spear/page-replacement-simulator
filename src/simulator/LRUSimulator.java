@@ -1,6 +1,6 @@
-package policy;
+package simulator;
 
-import policy.structure.ListNode;
+import simulator.structure.ListNode;
 
 import java.util.HashMap;
 import java.util.Map;

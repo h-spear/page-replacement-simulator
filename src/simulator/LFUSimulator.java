@@ -1,9 +1,9 @@
-package policy;
+package simulator;
 
 import java.util.*;
 
-import policy.structure.HeapElement;
-import static policy.structure.HeapElement.*;
+import simulator.structure.HeapElement;
+import static simulator.structure.HeapElement.*;
 
 public class LFUSimulator extends ReplacementSimulator {
     private Map<Long, Integer> map = new HashMap<>();

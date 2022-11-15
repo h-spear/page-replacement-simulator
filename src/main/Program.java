@@ -5,7 +5,7 @@ import etc.FileChooser;
 import static etc.IO.*;
 import static etc.Font.*;
 
-import policy.*;
+import simulator.*;
 import enums.Policy;
 
 import java.io.File;

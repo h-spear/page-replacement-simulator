@@ -1,7 +1,7 @@
-package policy;
+package simulator;
 
-import policy.structure.HeapElement;
-import static policy.structure.HeapElement.*;
+import simulator.structure.HeapElement;
+import static simulator.structure.HeapElement.*;
 
 import java.util.HashMap;
 import java.util.Map;

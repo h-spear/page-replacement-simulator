@@ -1,4 +1,4 @@
-package policy;
+package simulator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,8 +80,7 @@ public class ClockSimulator extends ReplacementSimulator {
         pointer = (pointer + 1) % bufferSize;
     }
 
-    @Override
-    protected void printTitle() {
+    public void printTitle() {
         System.out.println();
         System.out.printf("%s animation. (", name);
         printf(FONT_BLUE, "blue : hit, ");

@@ -1,6 +1,6 @@
 package enums;
 
-import policy.*;
+import simulator.*;
 
 public enum Policy {
     FIFO, LRU, LFU, MFU, Random, Clock;

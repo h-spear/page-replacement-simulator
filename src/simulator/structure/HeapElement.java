@@ -1,4 +1,4 @@
-package policy.structure;
+package simulator.structure;
 
 public class HeapElement {
     public int idx;

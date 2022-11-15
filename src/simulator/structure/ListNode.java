@@ -1,4 +1,4 @@
-package policy.structure;
+package simulator.structure;
 
 public class ListNode {
     public int idx;
