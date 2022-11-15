@@ -40,7 +40,7 @@ public class MFUSimulator extends ReplacementSimulator {
 
     private void increment(int i) {
         heap[i].refCount++;
-        hitBufferIdx = heap[i].bufferIdx;
+        hitBufferIdx = heap[i].idx;
         missBufferIdx = -1;
         heapify(i);
     }
@@ -49,12 +49,12 @@ public class MFUSimulator extends ReplacementSimulator {
         // x : data, y : frequency
         int idx = heapSize;
         if (heapSize == bufferSize) {
-            idx = heap[0].bufferIdx;
-            map.remove(heap[0].data);
+            idx = heap[0].idx;
+            map.remove(buffer[idx]);
             heap[0] = heap[--heapSize];
             heapify(0);
         }
-        heap[heapSize] = new HeapElement(data, 1, idx);
+        heap[heapSize] = new HeapElement(idx);
         buffer[idx] = data;
         hitBufferIdx = -1;
         missBufferIdx = idx;
@@ -62,8 +62,8 @@ public class MFUSimulator extends ReplacementSimulator {
 
         int i = heapSize - 1;
         while (i > 0 && heap[parent(i)].refCount < heap[i].refCount) {
-            map.put(heap[i].data, parent(i));
-            map.put(heap[parent(i)].data, i);
+            map.put(buffer[heap[i].idx], parent(i));
+            map.put(buffer[heap[parent(i)].idx], i);
 
             HeapElement temp = heap[i];
             heap[i] = heap[parent(i)];
@@ -85,8 +85,8 @@ public class MFUSimulator extends ReplacementSimulator {
             maximum = heap[maximum].refCount > heap[r].refCount ? maximum : r;
 
         if (maximum != i) {
-            map.put(heap[maximum].data, i);
-            map.put(heap[i].data, maximum);
+            map.put(buffer[heap[maximum].idx], i);
+            map.put(buffer[heap[i].idx], maximum);
 
             HeapElement temp = heap[maximum];
             heap[maximum] = heap[i];

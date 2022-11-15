@@ -39,7 +39,7 @@ public class LFUSimulator extends ReplacementSimulator {
 
     private void increment(int i) {
         heap[i].refCount++;
-        hitBufferIdx = heap[i].bufferIdx;
+        hitBufferIdx = heap[i].idx;
         missBufferIdx = -1;
         heapify(i);
     }
@@ -48,12 +48,12 @@ public class LFUSimulator extends ReplacementSimulator {
         // x : data, y : frequency
         int idx = heapSize;
         if (heapSize == bufferSize) {
-            idx = heap[0].bufferIdx;
-            map.remove(heap[0].data);
+            idx = heap[0].idx;
+            map.remove(buffer[idx]);
             heap[0] = heap[--heapSize];
             heapify(0);
         }
-        heap[heapSize] = new HeapElement(data, 1, idx);
+        heap[heapSize] = new HeapElement(idx);
         buffer[idx] = data;
         hitBufferIdx = -1;
         missBufferIdx = idx;
@@ -61,8 +61,8 @@ public class LFUSimulator extends ReplacementSimulator {
 
         int i = heapSize - 1;
         while (i > 0 && heap[parent(i)].refCount > heap[i].refCount) {
-            map.put(heap[i].data, parent(i));
-            map.put(heap[parent(i)].data, i);
+            map.put(buffer[heap[i].idx], parent(i));
+            map.put(buffer[heap[parent(i)].idx], i);
 
             HeapElement temp = heap[i];
             heap[i] = heap[parent(i)];
@@ -84,8 +84,8 @@ public class LFUSimulator extends ReplacementSimulator {
             minimum = heap[minimum].refCount < heap[r].refCount ? minimum : r;
 
         if (minimum != i) {
-            map.put(heap[minimum].data, i);
-            map.put(heap[i].data, minimum);
+            map.put(buffer[heap[minimum].idx], i);
+            map.put(buffer[heap[i].idx], minimum);
 
             HeapElement temp = heap[minimum];
             heap[minimum] = heap[i];

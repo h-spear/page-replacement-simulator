@@ -1,9 +1,8 @@
 package policy.structure;
 
 public class HeapElement {
-    public Long data;
+    public int idx;
     public int refCount;
-    public int bufferIdx;
 
     public static int parent(int i) {
         return (i - 1) / 2;
@@ -17,9 +16,8 @@ public class HeapElement {
         return 2 * i + 2;
     }
 
-    public HeapElement(Long data, int refCount, int bufferIdx) {
-        this.data = data;
-        this.refCount = refCount;
-        this.bufferIdx = bufferIdx;
+    public HeapElement(int idx) {
+        this.idx = idx;
+        this.refCount = 1;
     }
 }
