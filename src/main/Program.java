@@ -1,3 +1,5 @@
+package main;
+
 import enums.Mode;
 import etc.FileChooser;
 import static etc.IO.*;
@@ -11,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Program {
     private int bufferSize;
