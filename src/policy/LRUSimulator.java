@@ -19,8 +19,8 @@ public class LRUSimulator extends ReplacementSimulator {
         initialization(bufferSize);
 
         // double linked list
-        head = new ListNode(-1, 0L);
-        tail = new ListNode(-1, 0L);
+        head = new ListNode(-1);
+        tail = new ListNode(-1);
         head.next = tail;
         tail.prev = head;
     }
@@ -46,9 +46,12 @@ public class LRUSimulator extends ReplacementSimulator {
         } else {
             idx = tail.prev.idx;
             remove(tail.prev);
+            map.remove(buffer[idx]);
         }
         buffer[idx] = data;
-        addFirst(new ListNode(idx, data));
+        ListNode node = new ListNode(idx);
+        addFirst(node);
+        map.put(data, node);
 
         hitBufferIdx = -1;
         missBufferIdx = idx;
@@ -58,10 +61,10 @@ public class LRUSimulator extends ReplacementSimulator {
         return map.containsKey(data);
     }
 
-    private void remove(ListNode node) {
+    private ListNode remove(ListNode node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
-        map.remove(node.data);
+        return node;
     }
 
     private void addFirst(ListNode node) {
@@ -69,6 +72,5 @@ public class LRUSimulator extends ReplacementSimulator {
         node.next = head.next;
         node.prev = head;
         head.next = node;
-        map.put(node.data, node);
     }
 }

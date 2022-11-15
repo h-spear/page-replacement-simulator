@@ -2,13 +2,11 @@ package policy.structure;
 
 public class ListNode {
     public int idx;
-    public Long data;
     public ListNode prev;
     public ListNode next;
 
-    public ListNode(int idx, Long data) {
+    public ListNode(int idx) {
         this.idx = idx;
-        this.data = data;
         this.prev = null;
         this.next = null;
     }
