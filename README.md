@@ -13,7 +13,7 @@
 
 ## PACKAGES
 
-## ![package-diagram](docs/img/package.png)
+![package-diagram](docs/img/package.png)
 
 <br>
 
