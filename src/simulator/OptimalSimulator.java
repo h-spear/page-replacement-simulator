@@ -37,6 +37,7 @@ public class OptimalSimulator extends ReplacementSimulator {
             put(stream[i]);
         }
         report();
+        System.out.println();
     }
 
     @Override
@@ -44,7 +45,6 @@ public class OptimalSimulator extends ReplacementSimulator {
         this.stream = stream;
         this.streamSize = stream.length;
         super.simulate(stream);
-        report();
     }
 
 

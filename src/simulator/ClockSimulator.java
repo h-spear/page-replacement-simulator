@@ -80,6 +80,7 @@ public class ClockSimulator extends ReplacementSimulator {
         pointer = (pointer + 1) % bufferSize;
     }
 
+    @Override
     public void printTitle() {
         System.out.println();
         System.out.printf("%s animation. (", name);
@@ -101,6 +102,7 @@ public class ClockSimulator extends ReplacementSimulator {
         System.out.println();
     }
 
+    @Override
     public void showBuffer() {
         for (int i = 0; i < bufferSize; i++) {
             Long data = buffer[i];

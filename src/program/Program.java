@@ -1,4 +1,4 @@
-package main;
+package program;
 
 import enums.Mode;
 import etc.FileChooser;
@@ -87,7 +87,7 @@ public class Program {
         return true;
     }
 
-    private void selectBufferSize() throws IOException {
+    private boolean selectBufferSize() throws IOException {
         while (true) {
             System.out.println();
             println(FONT_GREEN, "enter buffer size.");
@@ -104,9 +104,10 @@ public class Program {
             }
             break;
         }
+        return true;
     }
 
-    private void selectPolicy() throws IOException {
+    private boolean selectPolicy() throws IOException {
         simulators = new ArrayList<>();
         while (true) {
             System.out.println();
@@ -137,6 +138,7 @@ public class Program {
             }
             break;
         }
+        return true;
     }
 
     private boolean directInput() throws IOException {

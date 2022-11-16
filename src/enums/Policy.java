@@ -8,7 +8,7 @@ public enum Policy {
     private static Policy[] policies = Policy.values();
 
     public static Simulator getSimulator(int i, int bufferSize) {
-        if (i >= getLength()){
+        if (i >= policies.length) {
             return null;
         }
 
@@ -27,9 +27,5 @@ public enum Policy {
         else if (i == Optimal.ordinal())
             return new OptimalSimulator(bufferSize);
         return null;
-    }
-
-    public static int getLength() {
-        return policies.length;
     }
 }

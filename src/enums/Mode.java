@@ -3,13 +3,13 @@ package enums;
 public enum Mode {
     DIRECT, FILE, PREV;
 
-    private static Mode[] list = Mode.values();
+    private static Mode[] modes = Mode.values();
 
     public static Mode getMode(int i) {
-        if (i >= getLength()) {
+        if (i >= modes.length) {
             return null;
         }
-        return list[i];
+        return modes[i];
     }
 
     public static String getTitle(Mode mode) {
@@ -21,9 +21,5 @@ public enum Mode {
             return "use prev data";
         }
         return "";
-    }
-
-    public static int getLength() {
-        return list.length;
     }
 }
