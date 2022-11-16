@@ -3,7 +3,7 @@ package enums;
 import simulator.*;
 
 public enum Policy {
-    FIFO, LRU, LFU, MFU, Random, Clock;
+    FIFO, LRU, LFU, MFU, Random, Clock, Optimal;
 
     private static Policy[] policies = Policy.values();
 
@@ -24,6 +24,8 @@ public enum Policy {
             return new RandomSimulator(bufferSize);
         else if (i == Clock.ordinal())
             return new ClockSimulator(bufferSize);
+        else if (i == Optimal.ordinal())
+            return new OptimalSimulator(bufferSize);
         return null;
     }
 

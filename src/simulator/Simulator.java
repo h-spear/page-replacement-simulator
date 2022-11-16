@@ -5,5 +5,5 @@ import java.io.IOException;
 
 public interface Simulator {
     void simulate(File file) throws IOException;
-    void simulate(Long[] stream);
+    void simulate(long[] stream);
 }

@@ -7,7 +7,7 @@ import java.io.*;
 
 abstract class ReplacementSimulator implements Simulator {
     protected String name = "Simulator";
-    protected Long[] buffer;
+    protected long[] buffer;
     protected int bufferSize;
     protected int totalHit;
     protected int cacheHit;
@@ -32,7 +32,7 @@ abstract class ReplacementSimulator implements Simulator {
     }
 
     @Override
-    public void simulate(Long[] stream) {
+    public void simulate(long[] stream) {
         printTitle();
         Integer t = 0;
         for (Long data: stream) {
@@ -57,7 +57,7 @@ abstract class ReplacementSimulator implements Simulator {
         cacheHit = 0;
         cacheMiss = 0;
         bufferSize = _bufferSize;
-        buffer = new Long[bufferSize];
+        buffer = new long[bufferSize];
         for (int i = 0; i < bufferSize; ++i)
             buffer[i] = -1L;    // 데이터가 없으면 -1
     }
@@ -101,7 +101,7 @@ abstract class ReplacementSimulator implements Simulator {
         System.out.println();
     }
 
-    private void report() {
+    protected void report() {
         double hitRatio =  ((double)cacheHit / (double)totalHit) * 100;
         println(FONT_BLACK + BACKGROUND_YELLOW, " " + name + " simulator report ");
         System.out.println("  Buffer Size : " + bufferSize);

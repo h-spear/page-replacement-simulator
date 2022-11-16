@@ -1,7 +1,9 @@
 package etc;
 
 import javax.swing.*;
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileChooser {
     private static JFileChooser jfc = new JFileChooser();

@@ -5,6 +5,7 @@ import etc.FileChooser;
 import static etc.IO.*;
 import static etc.Font.*;
 
+import etc.Settings;
 import simulator.*;
 import enums.Policy;
 
@@ -18,7 +19,7 @@ public class Program {
     private int bufferSize;
     private List<Simulator> simulators;
     private File file;
-    private Long[] stream;
+    private long[] stream;
     private String input;
     private Mode mode;
 
@@ -111,6 +112,11 @@ public class Program {
             System.out.println();
             println(FONT_GREEN, "select page replacement policy.(multiple select possible)");
             for (Policy policy: Policy.values()) {
+                if (policy == Policy.Optimal) {
+                    printf(RESET, " " + policy.ordinal() + ": " + policy);
+                    println(FONT_RED, " [O(n^2) : cannot operate if stream size > " + Settings.MAX_OPTIMAL_STREAM_SIZE + "]");
+                    continue;
+                }
                 println(RESET, " " + policy.ordinal() + ": " + policy);
             }
 
@@ -145,7 +151,8 @@ public class Program {
                 stream = Arrays.stream(arr)
                         .map(data -> Long.parseLong(data))
                         .filter(data -> (data <= 99999999 && data >= 0))
-                        .toArray(Long[]::new);
+                        .mapToLong(Number::longValue).toArray();
+
                 mode = Mode.DIRECT;
                 return true;
             } catch (NumberFormatException e) {
