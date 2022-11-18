@@ -1,11 +1,12 @@
 package program;
 
 import enums.Mode;
-import etc.FileChooser;
+import file.FileChooser;
 import static etc.IO.*;
-import static etc.Font.*;
+import static etc.IOFont.*;
 
-import etc.Settings;
+import file.FileManager;
+import settings.Settings;
 import simulator.*;
 import enums.Policy;
 
@@ -22,6 +23,9 @@ public class Program {
     private long[] stream;
     private String input;
     private Mode mode;
+    private boolean animation;
+    private boolean output;
+    private String directory;
 
     public void execute() throws IOException {
         while (true) {
@@ -29,9 +33,12 @@ public class Program {
                 break;
             selectBufferSize();
             selectPolicy();
+            selectAnimation();
+            selectDirectory();
             simulation();
 
             // replay
+            System.out.println();
             println(FONT_GREEN, "replay? (1: yes, other: no)");
             if (inputNumber() != 1) {
                 break;
@@ -43,10 +50,16 @@ public class Program {
         for (Simulator simulator: simulators) {
             // 모드에 맞게 실행.
             if (mode == Mode.DIRECT) {
-                simulator.simulate(stream);
+                if (output)
+                    simulator.simulate(stream, animation, new File(directory + FileManager.getFileName(simulator.getName())));
+                else
+                    simulator.simulate(stream, animation);
             } else if (mode == Mode.FILE) {
                 try {
-                    simulator.simulate(file);
+                    if (output)
+                        simulator.simulate(file, new File(directory + FileManager.getFileName(simulator.getName())));
+                    else
+                        simulator.simulate(file);
                 } catch (NumberFormatException e) {
                     println(FONT_RED, "the data format is invalid.\n");
                 }
@@ -139,6 +152,40 @@ public class Program {
             break;
         }
         return true;
+    }
+
+    private boolean selectAnimation() throws IOException {
+        if (mode == Mode.FILE)
+            return false;
+
+        System.out.println();
+        println(FONT_GREEN, "do you want animation? (1: yes, other: no)");
+        if (inputNumber() != 1) {
+            animation = false;
+        } else {
+            animation = true;
+        }
+        return true;
+    }
+
+    private boolean selectDirectory() throws IOException {
+        System.out.println();
+        println(FONT_GREEN, "do you want output excel file? (1: yes, other: no)");
+        if (inputNumber() != 1) {
+            output = false;
+            return false;
+        }
+        while (true) {
+            directory = FileChooser.chooseDirectory();
+            if (directory == null) {
+                System.out.println();
+                println(FONT_RED, "canceled. do not generate output.");
+                output = false;
+                return false;
+            }
+            output = true;
+            return true;
+        }
     }
 
     private boolean directInput() throws IOException {

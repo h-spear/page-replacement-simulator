@@ -1,5 +1,7 @@
 package simulator;
 
+import settings.Settings;
+
 import java.util.*;
 
 public class RandomSimulator extends ReplacementSimulator {
@@ -11,7 +13,7 @@ public class RandomSimulator extends ReplacementSimulator {
     }
 
     public RandomSimulator(int bufferSize) {
-        super.name = "random";
+        super.name = Settings.RANDOM_SIMULATOR_NAME;
         initialization(bufferSize);
     }
 

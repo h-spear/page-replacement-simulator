@@ -1,6 +1,6 @@
 package etc;
 
-public class Font {
+public class IOFont {
     public static final String FONT_BLACK = "\u001B[30m";
     public static final String FONT_RED = "\u001B[31m";
     public static final String FONT_GREEN = "\u001B[32m";

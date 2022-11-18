@@ -1,8 +1,9 @@
 package simulator;
 
-import etc.FileManager;
-import etc.Font;
-import etc.Settings;
+import file.FileManager;
+import etc.IOFont;
+import settings.Settings;
+import file.XSSFHelper;
 
 import java.io.*;
 import java.util.*;
@@ -19,7 +20,7 @@ public class OptimalSimulator extends ReplacementSimulator {
     }
 
     public OptimalSimulator(int bufferSize) {
-        super.name = "Optimal";
+        super.name = Settings.OPT_SIMULATOR_NAME;
         initialization(bufferSize);
         streamPointer = -1;
     }
@@ -28,7 +29,7 @@ public class OptimalSimulator extends ReplacementSimulator {
     public void simulate(File file) throws IOException {
         stream = FileManager.fileToStream(file);
         if (stream == null) {
-            System.out.println(Font.FONT_RED + "optimal simulator cannot be operated when the stream size is greater than " + Settings.MAX_OPTIMAL_STREAM_SIZE + Font.RESET);
+            System.out.println(IOFont.FONT_RED + "optimal simulator cannot be operated when the stream size is greater than " + Settings.MAX_OPTIMAL_STREAM_SIZE + IOFont.RESET);
             System.out.println();
             return;
         }
@@ -41,12 +42,42 @@ public class OptimalSimulator extends ReplacementSimulator {
     }
 
     @Override
-    public void simulate(long[] stream) {
-        this.stream = stream;
-        this.streamSize = stream.length;
-        super.simulate(stream);
+    public void simulate(File file, File outputFile) throws IOException {
+        xssfHelper = new XSSFHelper();
+        writeTitleToXSSF();
+        stream = FileManager.fileToStream(file);
+        if (stream == null) {
+            System.out.println(IOFont.FONT_RED + "optimal simulator cannot be operated when the stream size is greater than " + Settings.MAX_OPTIMAL_STREAM_SIZE + IOFont.RESET);
+            System.out.println();
+            return;
+        }
+        streamSize = stream.length;
+        Integer t = 0;
+        for (int i = 0; i < streamSize; i++) {
+            ++t;
+            put(stream[i]);
+            writeBufferLineToXSSF(t, stream[i]);
+        }
+        report();
+        writeReportToXSSF();
+        String filePath = xssfHelper.save(outputFile);
+        System.out.println("saved! " + filePath);
+        System.out.println();
     }
 
+    @Override
+    public void simulate(long[] stream, boolean animation) {
+        this.stream = stream;
+        this.streamSize = stream.length;
+        super.simulate(stream, animation);
+    }
+
+    @Override
+    public void simulate(long[] stream, boolean animation, File outputFile) {
+        this.stream = stream;
+        this.streamSize = stream.length;
+        super.simulate(stream, animation, outputFile);
+    }
 
     public void put(Long data) {
         totalHit++;

@@ -1,5 +1,6 @@
 package simulator;
 
+import settings.Settings;
 import simulator.structure.ListNode;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class LRUSimulator extends ReplacementSimulator {
     }
 
     public LRUSimulator(int bufferSize) {
-        super.name = "LRU";
+        super.name = Settings.LRU_SIMULATOR_NAME;
         initialization(bufferSize);
 
         // double linked list

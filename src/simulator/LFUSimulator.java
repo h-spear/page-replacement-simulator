@@ -2,6 +2,7 @@ package simulator;
 
 import java.util.*;
 
+import settings.Settings;
 import simulator.structure.HeapElement;
 import static simulator.structure.HeapElement.*;
 
@@ -15,7 +16,7 @@ public class LFUSimulator extends ReplacementSimulator {
     }
 
     public LFUSimulator(int bufferSize) {
-        super.name = "LFU";
+        super.name = Settings.LFU_SIMULATOR_NAME;
         heap = new HeapElement[bufferSize];
         heapSize = 0;
         initialization(bufferSize);

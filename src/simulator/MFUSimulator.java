@@ -1,5 +1,6 @@
 package simulator;
 
+import settings.Settings;
 import simulator.structure.HeapElement;
 import static simulator.structure.HeapElement.*;
 
@@ -16,7 +17,7 @@ public class MFUSimulator extends ReplacementSimulator {
     }
 
     public MFUSimulator(int bufferSize) {
-        super.name = "MFU";
+        super.name = Settings.MFU_SIMULATOR_NAME;
         heap = new HeapElement[bufferSize];
         heapSize = 0;
         initialization(bufferSize);

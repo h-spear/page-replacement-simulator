@@ -1,5 +1,7 @@
 package simulator;
 
+import settings.Settings;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ public class FIFOSimulator extends ReplacementSimulator {
     }
 
     public FIFOSimulator(int bufferSize) {
-        super.name = "FIFO";
+        super.name = Settings.FIFO_SIMULATOR_NAME;
         initialization(bufferSize);
     }
 

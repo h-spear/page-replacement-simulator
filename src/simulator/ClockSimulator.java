@@ -1,9 +1,11 @@
 package simulator;
 
+import settings.Settings;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import static etc.Font.*;
+import static etc.IOFont.*;
 import static etc.IO.*;
 
 public class ClockSimulator extends ReplacementSimulator {
@@ -16,7 +18,7 @@ public class ClockSimulator extends ReplacementSimulator {
     }
 
     public ClockSimulator(int bufferSize) {
-        super.name = "clock";
+        super.name = Settings.CLOCK_SIMULATOR_NAME;
         initialization(bufferSize);
         referenceBit = new boolean[bufferSize];
         pointer = -1;
@@ -103,7 +105,14 @@ public class ClockSimulator extends ReplacementSimulator {
     }
 
     @Override
-    public void showBuffer() {
+    public void showBuffer(Integer t, Long currData) {
+        System.out.printf("|");
+        printf(FONT_GREEN, centerAlign(t.toString(), 6));
+        System.out.printf("|");
+
+        printf(FONT_PURPLE, centerAlign(currData.toString(), 8));
+        System.out.printf("|");
+
         for (int i = 0; i < bufferSize; i++) {
             Long data = buffer[i];
             if (data == -1L) {
@@ -129,5 +138,28 @@ public class ClockSimulator extends ReplacementSimulator {
         printf(FONT_CYAN, centerAlign(Integer.toString(pointer), 6));
         System.out.printf("|");
         System.out.println();
+    }
+
+    @Override
+    public void writeTitleToXSSF() {
+        xssfHelper.createRow(1);
+        xssfHelper.writeCell(1, name + " simulator report", xssfHelper.styleOfTitle);
+
+        xssfHelper.createRow(9);
+        xssfHelper.writeCell(1, "time", xssfHelper.styleOfFontGreen);
+        xssfHelper.writeCell(2, "stream", xssfHelper.styleOfFontViolet);
+        xssfHelper.writeCell(3, "cursor", xssfHelper.styleOfFontIndigo);
+        for (int i = 1; i <= bufferSize; i++) {
+            xssfHelper.writeCell(3 + i, "page " + i, xssfHelper.styleOfDefault);
+        }
+    }
+
+    @Override
+    public void writeBufferLineToXSSF(int t, long data) {
+        xssfHelper.createRow(t + 9);
+        xssfHelper.writeCell(1, t, xssfHelper.styleOfFontGreen);
+        xssfHelper.writeCell(2, data, xssfHelper.styleOfFontViolet);
+        xssfHelper.writeCell(3, pointer, xssfHelper.styleOfFontIndigo);
+        xssfHelper.writeBufferLine(4, buffer, referenceBit, hitBufferIdx, missBufferIdx);
     }
 }
