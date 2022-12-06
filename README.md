@@ -32,6 +32,13 @@
 
 <br>
 
+## Design Pattern
+
+-   Template Method
+-   Strategy
+
+<br>
+
 ## PRODUCT
 
 -   입력 예시
