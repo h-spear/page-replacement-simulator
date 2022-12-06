@@ -32,7 +32,7 @@
 
 <br>
 
-## Design Pattern
+## DESIGN PATTERN
 
 -   Template Method
 -   Strategy
