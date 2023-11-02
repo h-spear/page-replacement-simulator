@@ -1,7 +1,7 @@
 # Pace Replacement Simulator
 
 -   OS
--   Java
+-   Java 11
 
 <br>
 
