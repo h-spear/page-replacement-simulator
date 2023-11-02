@@ -175,17 +175,16 @@ public class Program {
             output = false;
             return false;
         }
-        while (true) {
-            directory = FileChooser.chooseDirectory();
-            if (directory == null) {
-                System.out.println();
-                println(FONT_RED, "canceled. do not generate output.");
-                output = false;
-                return false;
-            }
-            output = true;
-            return true;
+
+        directory = FileChooser.chooseDirectory();
+        if (directory == null) {
+            System.out.println();
+            println(FONT_RED, "canceled. do not generate output.");
+            output = false;
+            return false;
         }
+        output = true;
+        return true;
     }
 
     private boolean directInput() throws IOException {

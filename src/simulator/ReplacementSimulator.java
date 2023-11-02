@@ -7,6 +7,7 @@ import static etc.IO.*;
 import static etc.IOFont.*;
 
 import java.io.*;
+import java.util.Objects;
 
 abstract class ReplacementSimulator implements Simulator {
     protected String name = "Simulator";
@@ -121,25 +122,25 @@ abstract class ReplacementSimulator implements Simulator {
         printf(FONT_BLUE, "blue : hit, ");
         printf(FONT_RED, "red : page fault");
         System.out.println(")");
-        System.out.printf("|");
+        System.out.print("|");
         printf(FONT_GREEN, " time ");
-        System.out.printf("|");
+        System.out.print("|");
         printf(FONT_PURPLE, " stream ");
-        System.out.printf("|");
+        System.out.print("|");
         for (int i = 1; i <= bufferSize; i++) {
             System.out.printf(centerAlign("page"+i, 8));
-            System.out.printf("|");
+            System.out.print("|");
         }
         System.out.println();
     }
 
     protected void showBuffer(Integer t, Long currData) {
-        System.out.printf("|");
+        System.out.print("|");
         printf(FONT_GREEN, centerAlign(t.toString(), 6));
-        System.out.printf("|");
+        System.out.print("|");
 
         printf(FONT_PURPLE, centerAlign(currData.toString(), 8));
-        System.out.printf("|");
+        System.out.print("|");
 
         for (int i = 0; i < bufferSize; i++) {
             Long data = buffer[i];
@@ -156,7 +157,7 @@ abstract class ReplacementSimulator implements Simulator {
                 }
                 printf(color, centerAlign(data.toString(), 8));
             }
-            System.out.printf("|");
+            System.out.print("|");
         }
         System.out.println();
     }
@@ -214,7 +215,7 @@ abstract class ReplacementSimulator implements Simulator {
         xssfHelper.writeCell(2, ((double)cacheHit / (double)totalHit) * 100, xssfHelper.styleOfFontGreen);
         xssfHelper.writeCell(4, "hit", xssfHelper.styleOfHit);
         xssfHelper.writeCell(5, "miss", xssfHelper.styleOfMiss);
-        if (name == Settings.CLOCK_SIMULATOR_NAME)
+        if (Objects.equals(name, Settings.CLOCK_SIMULATOR_NAME))
             xssfHelper.writeCell(6, "reference", xssfHelper.styleOfRef);
     }
 }

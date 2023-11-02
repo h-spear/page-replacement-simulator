@@ -100,21 +100,21 @@ public class ClockSimulator extends ReplacementSimulator {
             System.out.printf("|");
         }
         printf(FONT_CYAN, "cursor");
-        System.out.printf("|");
+        System.out.print("|");
         System.out.println();
     }
 
     @Override
     public void showBuffer(Integer t, Long currData) {
-        System.out.printf("|");
+        System.out.print("|");
         printf(FONT_GREEN, centerAlign(t.toString(), 6));
-        System.out.printf("|");
+        System.out.print("|");
 
         printf(FONT_PURPLE, centerAlign(currData.toString(), 8));
-        System.out.printf("|");
+        System.out.print("|");
 
         for (int i = 0; i < bufferSize; i++) {
-            Long data = buffer[i];
+            long data = buffer[i];
             if (data == -1L) {
                 System.out.printf(centerAlign("X", 8));
             } else {
@@ -128,15 +128,15 @@ public class ClockSimulator extends ReplacementSimulator {
                 }
 
                 if (isValid(i)) {
-                    printf(color, centerAlignAndEffect(data.toString(), 8, LINE));
+                    printf(color, centerAlignAndEffect(Long.toString(data), 8, LINE));
                 } else {
-                    printf(color, centerAlign(data.toString(), 8));
+                    printf(color, centerAlign(Long.toString(data), 8));
                 }
             }
-            System.out.printf("|");
+            System.out.print("|");
         }
         printf(FONT_CYAN, centerAlign(Integer.toString(pointer), 6));
-        System.out.printf("|");
+        System.out.print("|");
         System.out.println();
     }
 

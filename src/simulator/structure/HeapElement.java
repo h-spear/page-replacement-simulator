@@ -5,15 +5,15 @@ public class HeapElement {
     public int refCount;
 
     public static int parent(int i) {
-        return (i - 1) / 2;
+        return (i - 1) >> 1;
     }
 
     public static int left(int i) {
-        return 2 * i + 1;
+        return (i << 1) + 1;
     }
 
     public static int right(int i) {
-        return 2 * i + 2;
+        return (i << 1) + 2;
     }
 
     public HeapElement(int idx) {

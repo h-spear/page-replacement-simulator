@@ -116,8 +116,7 @@ public class XSSFHelper {
         try {
             fos = new FileOutputStream(file);
             xssfWb.write(fos);
-            if(fos != null)
-                fos.close();
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
