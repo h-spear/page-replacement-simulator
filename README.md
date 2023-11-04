@@ -4,11 +4,25 @@
 -   Java 11
 -   Gradle
 
+## REQUIREMENTS
+
+-   다양한 페이지 교체 정책 시뮬레이션 제공
+-   데이터 스트림을 직접 입력하거나 파일로 입력
+-   Hit, Miss, Hit Ratio 계산
+-   페이지 교체 애니메이션 출력
+-   결과 보고서 출력, 결과 파일 생성
+
 <br>
 
 ## DOC
 
 -   [PDF](docs/doc.pdf)
+
+<br>
+
+## RESULT
+
+-   [시연 영상](https://youtu.be/bhc0smhrTc4)
 
 <br>
 
@@ -40,7 +54,7 @@
 
 <br>
 
-## PRODUCT
+## EXAMPLE
 
 -   입력 예시
 
