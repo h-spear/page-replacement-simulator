@@ -1,7 +1,11 @@
 # Pace Replacement Simulator
 
 -   OS
+<<<<<<< HEAD
 -   Java 11
+=======
+-   Java 1.1
+>>>>>>> 1567ea9 (change to gradle project)
 
 <br>
 
